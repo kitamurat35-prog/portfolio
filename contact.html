@@ -100,10 +100,9 @@
                 <!-- メール件名を固定 -->
                 <input
                   type="hidden"
-                  name="_subject"
-                  value="ポートフォリオサイトからのお問い合わせ"
+                  name="message-start"
+                  value="【自動通知】ポートフォリオよりお問い合わせがありました。以下をご確認ください。"
                 />
-
                 <!-- スパム防止用（人間は触らない） -->
                 <input
                   type="text"
@@ -175,6 +174,11 @@
                 <div class="form-actions">
                   <button type="submit" class="btn-primary">送信する</button>
                 </div>
+                <input
+                  type="hidden"
+                  name="_redirect"
+                  value="https://kitamurat35-portfolio-git-main-kitamurat35s-projects.vercel.app/thanks.html"
+                />
               </form>
             </div>
           </div>
