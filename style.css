@@ -146,13 +146,14 @@ a:hover {
 
   /* 16:9用の横長背景を想定 */
   background-image:
-    url("../images/hero/hero-main.jpg");
+    url("../images/hero/hero-main.jpg"),
     radial-gradient(circle at 20% 0%, rgba(80, 156, 255, 0.25), transparent 55%),
-    radial-gradient(circle at 80% 100%, rgba(255, 92, 92, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 100%, rgba(255, 92, 92, 0.25), transparent 55%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 .hero-overlay {
   position: absolute;
@@ -930,68 +931,84 @@ a:hover {
 /* =========================
    プロモーション動画カード
    ========================= */
+/* =========================
+   プロモーション動画カード（WORKS）
+   ========================= */
 
-/* PVギャラリーのグリッド（↑と同じでもOKだが明示） */
+/* ギャラリーのグリッド */
 #gallery-pv .works-gallery-grid {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* カード全体（リンク） */
-.works-video-card {
-  display: block;
+/* カード全体（リンクも含めた箱） */
+#gallery-pv .works-video-card {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  color: inherit;
-  border-radius: 16px;
+  color: #e5e7eb;           /* 文字は薄いグレー */
+  border-radius: 18px;
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  background: #050816;      /* 濃いネイビー寄りの黒 */
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* サムネイル部分（16:9 ） */
-.works-video-thumb {
+/* サムネイル（16:9固定） */
+#gallery-pv .works-video-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 = 9 / 16 * 100 */
+  aspect-ratio: 16 / 9;
   background-size: cover;
   background-position: center;
 }
 
-/* 再生アイコン：中央の丸＋白い三角
-   （▶ は HTML に書いておく方式に戻す） */
-.works-video-play {
+/* 真ん中の再生アイコン */
+#gallery-pv .works-video-play {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gallery-pv .works-video-play::before {
+  content: "";
+  display: block;
   width: 72px;
   height: 72px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.4rem;
-  color: #ffffff;
-  z-index: 10;           /* サムネより前面 */
-  pointer-events: none;  /* クリックは a に通す */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  position: relative;
 }
 
-/* タイトル */
-.works-video-title {
+#gallery-pv .works-video-play::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 16px 0 16px 26px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 8px;  /* ちょい右寄せ */
+}
+
+/* タイトル（カード下の文字） */
+#gallery-pv .works-video-title {
   margin: 0;
   padding: 12px 16px 16px;
   font-weight: 600;
   font-size: 1rem;
+  text-align: center;
 }
 
-/* ホバー時のちょい浮き */
-.works-video-card:hover {
+/* ホバー時：ふわっと浮かす */
+#gallery-pv .works-video-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.65);
 }
+
+
 
 /* アンカー位置の微調整（ヘッダーぶんのズレ補正） */
 #gallery-creative,
@@ -1115,36 +1132,30 @@ a:hover {
 .form-actions {
   text-align: right;
 }
-/* メインボタン*/ 
-    .btn-primary {
-    display: inline-block;
-    padding: 10px 28px;
-    background-color: #253958;
-    color: #ffff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    }
-
-    .btn-primary:hover {
-    opacity: 0.9;
-    }
-
-/* CONTACTページの送信ボタン：光る演出を全部オフ */
+/* CONTACTページ用の送信ボタン */
 body#contact .btn-primary {
-  box-shadow: none !important;
-  background-image: none !important;
+  display: inline-block;
+  padding: 10px 28px;
+  background-color: #253958;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none;
 }
 
-/* 擬似要素で光を出している場合もまとめて潰す */
+body#contact .btn-primary:hover {
+  opacity: 0.9;
+}
+
+
+/* CONTACTページ：光る演出の擬似要素だけ潰す */
 body#contact .btn-primary::before,
 body#contact .btn-primary::after {
-  content: none !important;
-  box-shadow: none !important;
-  background: none !important;
-  background-image: none !important;
+  content: none;
 }
+
 
 /* ============================
    スマホ調整（幅 768px 以下）
@@ -1199,4 +1210,4 @@ body#contact .btn-primary::after {
   }
 }
 
-}
+
