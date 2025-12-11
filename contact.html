@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CONTACT｜お問い合わせ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body id="contact">
+    <!-- 共通ヘッダー -->
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="site-logo">
+          <span class="site-logo-main">PORTFOLIO</span>
+          <span class="site-logo-sub"
+            >Electromagnetic Engineer × AI &amp; Web</span
+          >
+        </div>
+
+        <nav class="global-nav">
+          <ul>
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+            <li><a href="career.html">CAREER</a></li>
+            <li><a href="skills.html">SKILLS</a></li>
+            <li><a href="works.html">WORKS</a></li>
+            <li><a href="contact.html" class="is-current">CONTACT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="section section-alt">
+        <div class="section-inner">
+          <h1 class="section-title">CONTACT</h1>
+
+          <div class="contact-hero-layout">
+            <div class="contact-hero-text">
+              <p class="contact-hero-lead">
+                ポートフォリオをご覧いただき、ありがとうございます。<br />
+                制作のご相談や、これまでの経歴・スキルに関するお問い合わせがありましたら、<br />
+                下記のフォームからお気軽にご連絡ください。
+              </p>
+              <p class="contact-hero-note">
+                ※このフォームはポートフォリオ用のサンプルです。<br />
+                実際にご連絡いただく場合は、ページ下部のメールアドレスからお願いいたします。
+              </p>
+            </div>
+
+            <div class="contact-hero-media">
+              <img
+                src="images/contact/contact-hero.jpg"
+                alt="CONTACTページのイメージ画像"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 本文エリア：説明＋フォーム -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="contact-layout">
+            <!-- 左：案内テキスト -->
+            <div class="contact-info">
+              <h2 class="contact-subtitle">ご相談のイメージ</h2>
+              <p>例えば、次のような内容をご相談いただけます。</p>
+              <ul>
+                <li>
+                  ポートフォリオに掲載している制作物について詳しく知りたい
+                </li>
+                <li>簡単な画像・バナー・サムネイル制作を依頼したい</li>
+                <li>WebページやLP構成の相談をしてみたい</li>
+                <li>キャリアチェンジ・リスキリングに関する情報交換をしたい</li>
+              </ul>
+
+              <p class="contact-mail-note">
+                実際のご連絡は、以下のメールアドレス宛にお願いいたします。
+              </p>
+              <p class="contact-mail">
+                Mail :
+                <a href="mailto:your.mail@example.com">
+                  your.mail@example.com
+                </a>
+              </p>
+            </div>
+
+            <!-- 右：サンプルフォーム -->
+            <!-- 疑似送信先へ -->
+            <div class="contact-form-wrapper">
+              <h2 class="contact-subtitle">お問い合わせフォーム（サンプル）</h2>
+
+              <form class="contact-form" action="#" method="post">
+                <div class="form-row">
+                  <label for="your-name">お名前</label>
+                  <input
+                    type="text"
+                    id="your-name"
+                    name="your-name"
+                    required
+                    placeholder="山田 太郎"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <label for="your-email">メールアドレス</label>
+                  <input
+                    type="email"
+                    id="your-email"
+                    name="your-email"
+                    required
+                    placeholder="example@example.com"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <label for="your-type">お問い合わせ種別</label>
+                  <select id="your-type" name="your-type">
+                    <option value="" disabled selected>選択してください</option>
+                    <option value="work">制作のご相談</option>
+                    <option value="portfolio">ポートフォリオについて</option>
+                    <option value="career">キャリア・学習について</option>
+                    <option value="other">その他</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <label for="your-message">メッセージ</label>
+                  <textarea
+                    id="your-message"
+                    name="your-message"
+                    rows="5"
+                    required
+                    placeholder="お問い合わせ内容を入力してください"
+                  ></textarea>
+                </div>
+
+                <p class="contact-form-note">
+                  ※送信ボタンを押してもメールは送信されません（動作イメージ用）。
+                </p>
+                  <div class="form-actions">
+            <button type="submit" class="btn-primary">送信内容を確認する</button>
+          </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 共通フッター -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <p class="site-footer-copy">
+          &copy; 2025 Toshikazu Kitamura. All rights reserved.
+        </p>
+        <nav class="footer-nav">
+          <a href="#contact">ページ先頭へ戻る</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
