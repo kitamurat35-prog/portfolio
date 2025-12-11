@@ -146,13 +146,14 @@ a:hover {
 
   /* 16:9用の横長背景を想定 */
   background-image:
-    url("../images/hero/hero-main.jpg");
+    url("../images/hero/hero-main.jpg"),
     radial-gradient(circle at 20% 0%, rgba(80, 156, 255, 0.25), transparent 55%),
-    radial-gradient(circle at 80% 100%, rgba(255, 92, 92, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 100%, rgba(255, 92, 92, 0.25), transparent 55%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 .hero-overlay {
   position: absolute;
@@ -901,40 +902,7 @@ a:hover {
 
 /* ========== GALLERY（画像＋動画） ========== */
 
-.works-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.works-gallery-grid img,
-.works-gallery-grid video {
-  width: 100%;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-/* スマホ対応 */
-@media (max-width: 900px) {
-  .works-category-grid,
-  .works-gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .works-category-grid,
-  .works-gallery-grid {
-    grid-template-columns: 1fr;
-  }
-}
-#gallery-creative,
-#gallery-pv,
-#gallery-web {
-  scroll-margin-top: 80px; /* ヘッダーの高さに合わせて調整 */
-}
-/* WORKS ギャラリーセクション */
+/* ギャラリー1ブロック */
 .works-gallery-section {
   margin-top: 24px;
 }
@@ -944,54 +912,108 @@ a:hover {
   font-size: 1rem;
 }
 
-/* 既存のギャラリーグリッドはそのままでOK
+/* 静止画・動画を並べるグリッド */
 .works-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
-/*  
-.works-gallery-grid img,
-.works-gallery-grid video {
-  width: 100%;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-*/
-/* 画像用 */
+
+/* 静止画（画像ギャラリー用） */
 .works-gallery-grid img {
   width: 100%;
   display: block;
   border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* 動画用（ここがポイント） */
-.works-gallery-grid video {
-  width: 100%;
-  display: block;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+/* =========================
+   プロモーション動画カード（WORKS）
+   ========================= */
 
-  /* 他要素に埋もれないように前面へ＆クリック可能保証 */
+/* ギャラリーのグリッド（ここはそのままでOK） */
+#gallery-pv .works-gallery-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* カード全体（リンクも含めた箱） */
+#gallery-pv .works-video-card {
+  display: block;                      /* flex じゃなくて block でOK */
+  text-decoration: none;
+  color: #e5e7eb;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #050816;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* サムネイル（16:9固定：padding-top方式） */
+#gallery-pv .works-video-thumb {
   position: relative;
-  z-index: 10;
-  pointer-events: auto;
-
-  /* もし縦長・横長の差が気になるなら、高さだけ軽く制御してもOK
-  max-height: 420px;
-  object-fit: cover;
-  */
+  width: 100%;
+  padding-top: 56.25%;                 /* ★ 16:9 = 9/16 = 0.5625 */
+  background-size: cover;
+  background-position: center;
 }
 
-/* アンカー位置の微調整（任意） */
+/* 再生アイコン（中央に） */
+#gallery-pv .works-video-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 丸いオーバーレイ＋三角形 */
+#gallery-pv .works-video-play::before {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+#gallery-pv .works-video-play::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 16px 0 16px 26px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 8px;  /* ちょい右寄せ */
+}
+
+/* タイトル（カード下の文字） */
+#gallery-pv .works-video-title {
+  margin: 0;
+  padding: 12px 16px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ホバー時：ふわっと浮かす */
+#gallery-pv .works-video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.65);
+}
+
+
+
+/* アンカー位置の微調整（ヘッダーぶんのズレ補正） */
 #gallery-creative,
 #gallery-pv,
 #gallery-web {
-  scroll-margin-top: 80px;  /* ヘッダーの高さに合わせて調整 */
+  scroll-margin-top: 80px;
 }
+
 
 /* ==============================
    CONTACT ページ
@@ -1107,33 +1129,87 @@ a:hover {
 .form-actions {
   text-align: right;
 }
-/* メインボタン*/ 
-    .btn-primary {
-    display: inline-block;
-    padding: 10px 28px;
-    background-color: #253958;
-    color: #ffff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    }
-
-    .btn-primary:hover {
-    opacity: 0.9;
-    }
-
-/* CONTACTページの送信ボタン：光る演出を全部オフ */
+/* CONTACTページ用の送信ボタン */
 body#contact .btn-primary {
-  box-shadow: none !important;
-  background-image: none !important;
+  display: inline-block;
+  padding: 10px 28px;
+  background-color: #253958;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none;
 }
 
-/* 擬似要素で光を出している場合もまとめて潰す */
+body#contact .btn-primary:hover {
+  opacity: 0.9;
+}
+
+
+/* CONTACTページ：光る演出の擬似要素だけ潰す */
 body#contact .btn-primary::before,
 body#contact .btn-primary::after {
-  content: none !important;
-  box-shadow: none !important;
-  background: none !important;
-  background-image: none !important;
+  content: none;
+}
+
+
+/* ============================
+   スマホ調整（幅 768px 以下）
+============================ */
+@media (max-width: 768px) {
+
+  /* ヘッダー全体を圧縮 */
+  .site-header {
+    padding: 8px 16px;
+  }
+
+  /* ロゴの文字サイズ */
+  .site-logo-main {
+    font-size: 1.2rem;
+  }
+  .site-logo-sub {
+    font-size: 0.7rem;
+  }
+
+  /* ナビを1段で収める or 止むを得ず2段でも崩れないように */
+  .global-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+  }
+  .global-nav a {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+
+  /* HERO の余白を削る（グレー帯対策） */
+  .hero {
+    height: auto;
+    padding: 40px 0 60px;
+    background-size: cover;
+    background-position: center top;
+  }
+
+  /* HERO テキストを小さめに */
+  .hero-title {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+  .hero-tagline {
+    font-size: 0.9rem;
+  }
+
+  /* セクションの左右余白を狭く */
+  .section-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+
+/* ==== デバッグ用：PVサムネを強制でデカくする ==== */
+#gallery-pv .works-video-thumb {
+  height: 200px !important;
+  background-color: red !important;
 }
