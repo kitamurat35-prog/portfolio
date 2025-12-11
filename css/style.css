@@ -135,29 +135,45 @@ a:hover {
 /* ==============================
    HERO（TOP専用）
 ============================== */
+
+/* 背景 ＋ パンアニメーション */
 .hero {
   position: relative;
+  width: 100%;
   min-height: 80vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 80px 16px 72px;
   color: #ffffff;
+  overflow: hidden;
 
-  /* 16:9用の横長背景を想定 */
+  /* 背景画像＋光のグラデ */
   background-image:
     url("../images/hero/hero-main.jpg"),
     radial-gradient(circle at 20% 0%, rgba(80, 156, 255, 0.25), transparent 55%),
     radial-gradient(circle at 80% 100%, rgba(255, 92, 92, 0.25), transparent 55%);
-  background-size: cover;
+  background-size: 140%;
   background-position: center;
   background-repeat: no-repeat;
+
+  /* ゆっくりパンさせる */
+  animation: heroMove 400s ease-in-out infinite;
 }
 
+/* 背景のパンアニメーション */
+@keyframes heroMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 60% 48%; }
+  100% { background-position: 100% 50%; }
+}
 
+/* うっすら暗くするオーバーレイ */
 .hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     135deg,
     rgba(3, 8, 25, 0.55),
@@ -165,16 +181,23 @@ a:hover {
   );
 }
 
+/* 中身（テキストコンテナ） */
 .hero-inner {
   position: relative;
+  z-index: 2;
   max-width: 960px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
+/* コピー本体 */
 .hero-copy {
   max-width: 640px;
 }
 
+/* タグライン／タイトル／リード文 */
 .hero-tagline {
   margin: 0 0 12px;
   font-size: 0.95rem;
@@ -203,6 +226,29 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* スマホ（768px以下） */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;              /* 固定高さを解除 */
+    min-height: 70vh;
+    padding: 96px 16px 72px;   /* 上にちょい余裕（ヘッダー分） */
+    background-size: cover;    /* 画像を画面いっぱいに */
+    background-position: center top;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-title br {
+    display: inline;
+  }
+
+  .hero-lead {
+    font-size: 0.95rem;
+  }
 }
 
 /* ボタン */
@@ -236,8 +282,8 @@ a:hover {
   transform: translateY(-1px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
+
 /* トップページモーション */
-/* --- フェードイン関連（これは今のままでOK） --- */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -252,74 +298,6 @@ a:hover {
 .fade-in.delay-1 { transition-delay: .2s; }
 .fade-in.delay-2 { transition-delay: .4s; }
 .fade-in.delay-3 { transition-delay: .6s; }
-
-
-/* --- ここから .hero 関連を A案で上書き --- */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 90vh;
-  overflow: hidden;
-  background-image: url("../images/hero/hero-main.jpg");
-  background-size: 140%;
-  background-position: center;
-  background-repeat: no-repeat;
-  animation: heroMove 400s ease-in-out infinite; /* ← これ */
-}
-
-@keyframes heroMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 60% 48%; }
-  100% { background-position: 100% 50%; }
-}
-
-
-/* オーバーレイ（もし薄いグラデ入れたい用。背景は.heroが持つ） */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  /* 必要なら薄い黒グラデとかをここに足す */
-  /* background: radial-gradient(circle at top, rgba(0,0,0,.4), rgba(0,0,0,.8)); */
-}
-
-/* 文字は前面に出す */
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 2;
-}
-
-
-
-/* トップページモーションここまで */
-
-/* HEROのレスポンシブ */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 70vh;
-    padding-top: 96px;
-  }
-
-  .hero-title {
-    font-size: 1.8rem;
-  }
-
-  .hero-title br {
-    display: inline;
-  }
-
-  .hero-lead {
-    font-size: 0.95rem;
-  }
-}
 
 /* ==============================
    TOPイントロセクション
@@ -576,6 +554,7 @@ a:hover {
 .career-table tbody tr:nth-child(even) {
   background: #f8fafc;
 }
+
 .career-link {
   color: inherit;
   text-decoration: none;
@@ -585,11 +564,11 @@ a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
 /* PROFILE → CAREER のアンカー位置補正 */
 #career .career-episode {
   scroll-margin-top: 90px; /* ヘッダーの高さに応じて調整（80〜100でお好み） */
 }
-
 
 /* HISTORY カード */
 
@@ -666,6 +645,7 @@ a:hover {
     padding: 8px 10px;
   }
 }
+
 /* ==============================
    SKILLS ページ
 ============================== */
@@ -738,10 +718,10 @@ a:hover {
 .skill-points li + li {
   margin-top: 4px;
 }
+
 .anchor-fix {
   scroll-margin-top: 96px; /* 固定ヘッダー分のズレを解消 */
 }
-
 
 /* スマホ対応 */
 
@@ -754,6 +734,7 @@ a:hover {
     max-height: none;
   }
 }
+
 /* ==============================
    WORKS ページ
 ============================== */
@@ -812,7 +793,6 @@ a:hover {
   width: 100%;
   border-radius: 14px;
   object-fit: cover;
-  /* max-height: 180px; */
 }
 
 .work-summary-title {
@@ -863,6 +843,7 @@ a:hover {
     max-height: none;
   }
 }
+
 /* ========== WORKS HERO ========== */
 
 .works-hero img {
@@ -905,6 +886,8 @@ a:hover {
 /* ギャラリー1ブロック */
 .works-gallery-section {
   margin-top: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .works-gallery-heading {
@@ -927,25 +910,14 @@ a:hover {
   object-fit: cover;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
-.works-gallery-section {
-  padding-left: 8px;
-  padding-right: 8px;
-}
 
 /* =========================
    プロモーション動画カード（WORKS）
-   ========================= */
-
-/* ギャラリーのグリッド（ここはそのままでOK） */
-#gallery-pv .works-gallery-grid {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
+========================= */
 
 /* カード全体（リンクも含めた箱） */
 #gallery-pv .works-video-card {
-  display: block;                      /* flex じゃなくて block でOK */
+  display: block;
   text-decoration: none;
   color: #e5e7eb;
   border-radius: 18px;
@@ -959,7 +931,7 @@ a:hover {
 #gallery-pv .works-video-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;                 /* ★ 16:9 = 9/16 = 0.5625 */
+  padding-top: 56.25%; /* 16:9 */
   background-size: cover;
   background-position: center;
 }
@@ -992,7 +964,7 @@ a:hover {
   border-style: solid;
   border-width: 16px 0 16px 26px;
   border-color: transparent transparent transparent #ffffff;
-  margin-left: 8px;  /* ちょい右寄せ */
+  margin-left: 8px;
 }
 
 /* タイトル（カード下の文字） */
@@ -1004,22 +976,23 @@ a:hover {
   text-align: center;
 }
 
-/* ホバー時：ふわっと浮かす */
+/* カード全体をふわっと浮かせる */
 #gallery-pv .works-video-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 44px rgba(15, 23, 42, 0.65);
 }
-.works-video-card:hover .works-video-thumb img {
+
+/* サムネイル（背景画像）をズーム＋暗く */
+#gallery-pv .works-video-card:hover .works-video-thumb {
+  background-size: 108%;
   filter: brightness(0.8);
-  transform: scale(1.03);
   transition: 0.25s ease;
 }
 
-.works-video-card:hover .works-video-play::before {
+/* 再生アイコンの背景を少し濃く */
+#gallery-pv .works-video-card:hover .works-video-play::before {
   background: rgba(0, 0, 0, 0.65);
 }
-
-
 
 /* アンカー位置の微調整（ヘッダーぶんのズレ補正） */
 #gallery-creative,
@@ -1027,7 +1000,6 @@ a:hover {
 #gallery-web {
   scroll-margin-top: 80px;
 }
-
 
 /* ==============================
    CONTACT ページ
@@ -1143,7 +1115,8 @@ a:hover {
 .form-actions {
   text-align: right;
 }
-/* CONTACTページ用の送信ボタン */
+
+/* CONTACTページ：送信ボタン */
 body#contact .btn-primary {
   display: inline-block;
   padding: 10px 28px;
@@ -1156,17 +1129,18 @@ body#contact .btn-primary {
   box-shadow: none;
 }
 
+/* hover 中に浮かせる効果を完全に無効化 */
 body#contact .btn-primary:hover {
   opacity: 0.9;
+  transform: none !important;
+  box-shadow: none !important;
 }
-
 
 /* CONTACTページ：光る演出の擬似要素だけ潰す */
 body#contact .btn-primary::before,
 body#contact .btn-primary::after {
   content: none;
 }
-
 
 /* ============================
    スマホ調整（幅 768px 以下）
@@ -1182,6 +1156,7 @@ body#contact .btn-primary::after {
   .site-logo-main {
     font-size: 1.2rem;
   }
+
   .site-logo-sub {
     font-size: 0.7rem;
   }
@@ -1192,17 +1167,10 @@ body#contact .btn-primary::after {
     justify-content: center;
     gap: 8px 12px;
   }
+
   .global-nav a {
     font-size: 0.85rem;
     padding: 4px 8px;
-  }
-
-  /* HERO の余白を削る（グレー帯対策） */
-  .hero {
-    height: auto;
-    padding: 40px 0 60px;
-    background-size: cover;
-    background-position: center top;
   }
 
   /* HERO テキストを小さめに */
@@ -1210,6 +1178,7 @@ body#contact .btn-primary::after {
     font-size: 1.8rem;
     line-height: 1.4;
   }
+
   .hero-tagline {
     font-size: 0.9rem;
   }
@@ -1225,88 +1194,126 @@ body#contact .btn-primary::after {
    THANKS ページ
 ============================== */
 
-#thanks .section-inner {
-  max-width: 720px;
+body#thanks {
+  background-color: #f4f7fb;
 }
 
-.thanks-wrapper {
-  background: #f9fafb;
-  border-radius: 24px;
-  padding: 40px 28px 36px;
-  text-align: center;
-  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
-}
-
-.thanks-icon-wrap {
+/* 画面の縦中央寄せ */
+.thanks-hero {
   display: flex;
+  align-items: center;
+  padding: 80px 16px 96px;
+}
+
+/* 白いカード本体 */
+.thanks-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 32px 40px;
+  border-radius: 32px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+
+/* チェックアイコンまわり */
+.thanks-icon-wrap {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e);
+  box-shadow: 0 18px 45px rgba(34, 197, 94, 0.45);
 }
 
 .thanks-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #ffffff;
-  font-size: 2rem;
-  font-weight: 700;
-  box-shadow: 0 14px 30px rgba(22, 163, 74, 0.35);
+  font-size: 2.8rem;
+  color: #f9fafb;
 }
 
+/* タイトル＆本文 */
 .thanks-title {
-  margin: 0 0 12px;
-  font-size: 1.6rem;
+  margin: 0 0 16px;
+  font-size: 1.9rem;
+  line-height: 1.5;
+  color: #0f172a;
 }
 
-.thanks-text {
-  margin: 0 0 24px;
-  font-size: 0.95rem;
+.thanks-lead {
+  margin: 0;
+  font-size: 0.98rem;
   color: #4b5563;
+  line-height: 1.9;
 }
 
-.thanks-actions {
+/* ボタンを中央寄せするラッパー */
+body#thanks .thanks-buttons {
+  margin-top: 32px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
 }
 
-/* セカンダリボタン（既存のbtnを利用） */
-.btn-secondary {
+/* このページだけでボタンサイズを調整したい場合 */
+body#thanks .thanks-main-btn {
+  min-width: 220px;
+}
+
+body#thanks .thanks-buttons .btn-primary,
+body#thanks .thanks-buttons .btn-outline {
+  min-width: 180px;
+}
+
+/* THANKSページ：TOPへ戻るボタンをナビ風にする */
+body#thanks .btn-primary.btn-back {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 12px 32px;
+  background: #2459ff;
+  color: #ffffff;
   border-radius: 999px;
-  font-size: 0.95rem;
+  border: none;
   font-weight: 600;
-  border: 1px solid #253958;
-  color: #253958;
-  background: transparent;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease,
-    background-color 0.15s ease;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  box-shadow: none;
 }
 
-.btn-secondary:hover {
-  background: #e5edff;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+/* ホバー時：少しだけ明るく */
+body#thanks .btn-primary.btn-back:hover {
+  background: #3b6cff;
+  opacity: 0.95;
+  transform: none;
+  box-shadow: none;
 }
 
 /* スマホ調整 */
-@media (max-width: 640px) {
-  .thanks-wrapper {
-    padding: 32px 20px 28px;
+@media (max-width: 768px) {
+  .thanks-hero {
+    padding-top: 72px;
+    padding-bottom: 80px;
+  }
+
+  .thanks-card {
+    padding: 32px 20px 32px;
+    border-radius: 24px;
   }
 
   .thanks-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+  }
+
+  .thanks-lead {
+    font-size: 0.9rem;
   }
 }
 
-
+/* 全ページ共通：戻るボタン */
+.btn-back {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 180px;
+}
