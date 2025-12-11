@@ -985,49 +985,63 @@ a:hover {
   border-radius: 8px;
 }
 
-/* WORKS：動画カード */
-#gallery-pv .works-gallery-grid {
+/* =========================
+   WORKS：ギャラリー レイアウト
+   ========================= */
+
+/* ギャラリー全体のグリッド */
+#works .works-gallery-grid {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 24px;
 }
 
-.works-video-card {
+/* 動画カード全体（クリック領域） */
+#works .works-video-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   text-decoration: none;
   color: inherit;
 }
 
-.works-video-thumb {
+/* サムネイル部分（16:9の箱＋背景画像） */
+#works .works-video-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 */
-  border-radius: 18px;
-  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.works-video-play {
+/* ど真ん中の再生アイコン */
+#works .works-video-play {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #fff;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
-.works-video-title {
-  margin: 4px 0 0;
-  font-size: 0.95rem;
-  font-weight: 600;
+/* ホバー時のふわっと浮く演出 */
+#works .works-video-card:hover .works-video-thumb {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
 }
 
+/* タイトル（カード下のテキスト） */
+#works .works-video-title {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
 
 
 /* アンカー位置の微調整（任意） */
