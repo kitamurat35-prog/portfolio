@@ -929,13 +929,10 @@ a:hover {
 }
 
 /* =========================
-   プロモーション動画カード
-   ========================= */
-/* =========================
    プロモーション動画カード（WORKS）
    ========================= */
 
-/* ギャラリーのグリッド */
+/* ギャラリーのグリッド（ここはそのままでOK） */
 #gallery-pv .works-gallery-grid {
   display: grid;
   gap: 24px;
@@ -944,27 +941,26 @@ a:hover {
 
 /* カード全体（リンクも含めた箱） */
 #gallery-pv .works-video-card {
-  display: flex;
-  flex-direction: column;
+  display: block;                      /* flex じゃなくて block でOK */
   text-decoration: none;
-  color: #e5e7eb;           /* 文字は薄いグレー */
+  color: #e5e7eb;
   border-radius: 18px;
   overflow: hidden;
-  background: #050816;      /* 濃いネイビー寄りの黒 */
+  background: #050816;
   box-shadow: 0 14px 36px rgba(15, 23, 42, 0.45);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* サムネイル（16:9固定） */
+/* サムネイル（16:9固定：padding-top方式） */
 #gallery-pv .works-video-thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  padding-top: 56.25%;                 /* ★ 16:9 = 9/16 = 0.5625 */
   background-size: cover;
   background-position: center;
 }
 
-/* 真ん中の再生アイコン */
+/* 再生アイコン（中央に） */
 #gallery-pv .works-video-play {
   position: absolute;
   inset: 0;
@@ -973,6 +969,7 @@ a:hover {
   justify-content: center;
 }
 
+/* 丸いオーバーレイ＋三角形 */
 #gallery-pv .works-video-play::before {
   content: "";
   display: block;
