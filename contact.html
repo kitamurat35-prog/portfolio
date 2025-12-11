@@ -97,29 +97,12 @@
                 action="https://formspree.io/f/mgvgpezr"
                 method="POST"
               >
-                <!-- メール件名を固定 -->
+                <!-- 件名 -->
                 <input
                   type="hidden"
-                  name="message-start"
-                  value="【自動通知】ポートフォリオよりお問い合わせがありました。以下をご確認ください。"
+                  name="_subject"
+                  value="ポートフォリオサイトからのお問い合わせ"
                 />
-                <!-- スパム防止用（人間は触らない） -->
-                <input
-                  type="text"
-                  name="_gotcha"
-                  style="display: none"
-                  tabindex="-1"
-                  autocomplete="off"
-                />
-
-                <!-- 送信後に独自のサンクスページへ飛ばしたい場合（任意） -->
-                <!--
-                <input
-                  type="hidden"
-                  name="_redirect"
-                  value="https://あなたのドメイン/thanks.html"
-                />
-                -->
 
                 <div class="form-row">
                   <label for="your-name">お名前</label>
@@ -128,7 +111,6 @@
                     id="your-name"
                     name="name"
                     required
-                    autocomplete="name"
                     placeholder="山田 太郎"
                   />
                 </div>
@@ -140,7 +122,6 @@
                     id="your-email"
                     name="email"
                     required
-                    autocomplete="email"
                     placeholder="example@example.com"
                   />
                 </div>
@@ -174,11 +155,6 @@
                 <div class="form-actions">
                   <button type="submit" class="btn-primary">送信する</button>
                 </div>
-                <input
-                  type="hidden"
-                  name="_redirect"
-                  value="https://kitamurat35-portfolio-git-main-kitamurat35s-projects.vercel.app/thanks.html"
-                />
               </form>
             </div>
           </div>
