@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CONTACT｜お問い合わせ</title>
+    <!-- 必要なら v= でキャッシュバスター付けてもOK -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body id="contact">
@@ -12,9 +13,9 @@
       <div class="site-header-inner">
         <div class="site-logo">
           <span class="site-logo-main">PORTFOLIO</span>
-          <span class="site-logo-sub"
-            >Electromagnetic Engineer × AI &amp; Web</span
-          >
+          <span class="site-logo-sub">
+            Electromagnetic Engineer × AI &amp; Web
+          </span>
         </div>
 
         <nav class="global-nav">
@@ -44,8 +45,8 @@
                 下記のフォームからお気軽にご連絡ください。
               </p>
               <p class="contact-hero-note">
-                ※このフォームはポートフォリオ用のサンプルです。<br />
-                実際にご連絡いただく場合は、ページ下部のメールアドレスからお願いいたします。
+                ※フォームから送信された内容は、運営者宛てのメールとして自動送信されます。<br />
+                うまく送信できない場合は、ページ下部のメールアドレス宛に直接ご連絡ください。
               </p>
             </div>
 
@@ -77,7 +78,7 @@
               </ul>
 
               <p class="contact-mail-note">
-                実際のご連絡は、以下のメールアドレス宛にお願いいたします。
+                フォーム以外からご連絡いただく場合は、以下のメールアドレスをご利用ください。
               </p>
               <p class="contact-mail">
                 Mail :
@@ -87,19 +88,48 @@
               </p>
             </div>
 
-            <!-- 右：サンプルフォーム -->
-            <!-- 疑似送信先へ -->
+            <!-- 右：Formspree 本番フォーム -->
             <div class="contact-form-wrapper">
-              <h2 class="contact-subtitle">お問い合わせフォーム（サンプル）</h2>
+              <h2 class="contact-subtitle">お問い合わせフォーム</h2>
 
-              <form class="contact-form" action="#" method="post">
+              <form
+                class="contact-form"
+                action="https://formspree.io/f/mgvgpezr"
+                method="POST"
+              >
+                <!-- メール件名を固定 -->
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="ポートフォリオサイトからのお問い合わせ"
+                />
+
+                <!-- スパム防止用（人間は触らない） -->
+                <input
+                  type="text"
+                  name="_gotcha"
+                  style="display: none"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+
+                <!-- 送信後に独自のサンクスページへ飛ばしたい場合（任意） -->
+                <!--
+                <input
+                  type="hidden"
+                  name="_redirect"
+                  value="https://あなたのドメイン/thanks.html"
+                />
+                -->
+
                 <div class="form-row">
                   <label for="your-name">お名前</label>
                   <input
                     type="text"
                     id="your-name"
-                    name="your-name"
+                    name="name"
                     required
+                    autocomplete="name"
                     placeholder="山田 太郎"
                   />
                 </div>
@@ -109,15 +139,16 @@
                   <input
                     type="email"
                     id="your-email"
-                    name="your-email"
+                    name="email"
                     required
+                    autocomplete="email"
                     placeholder="example@example.com"
                   />
                 </div>
 
                 <div class="form-row">
                   <label for="your-type">お問い合わせ種別</label>
-                  <select id="your-type" name="your-type">
+                  <select id="your-type" name="type" required>
                     <option value="" disabled selected>選択してください</option>
                     <option value="work">制作のご相談</option>
                     <option value="portfolio">ポートフォリオについて</option>
@@ -130,7 +161,7 @@
                   <label for="your-message">メッセージ</label>
                   <textarea
                     id="your-message"
-                    name="your-message"
+                    name="message"
                     rows="5"
                     required
                     placeholder="お問い合わせ内容を入力してください"
@@ -138,11 +169,11 @@
                 </div>
 
                 <p class="contact-form-note">
-                  ※送信ボタンを押してもメールは送信されません（動作イメージ用）。
+                  ※送信ボタンを押すと、入力内容がメールとして送信されます。
                 </p>
-                  <div class="form-actions">
-            <button type="submit" class="btn-primary">送信内容を確認する</button>
-          </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn-primary">送信する</button>
                 </div>
               </form>
             </div>
