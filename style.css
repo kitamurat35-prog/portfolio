@@ -1208,3 +1208,8 @@ body#contact .btn-primary::after {
 }
 
 
+/* ==== デバッグ用：PVサムネを強制でデカくする ==== */
+#gallery-pv .works-video-thumb {
+  height: 200px !important;
+  background-color: red !important;
+}
