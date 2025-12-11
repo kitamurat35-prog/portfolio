@@ -1248,3 +1248,67 @@ body#contact .btn-primary::after {
     padding-right: 16px;
   }
 }
+/* =========================
+   プロモーション動画カード
+   ========================= */
+
+/* PVギャラリーのグリッドレイアウト */
+#gallery-pv .works-gallery-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* カード全体 */
+.works-video-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* サムネイル部分（16:9で高さを確保） */
+.works-video-thumb {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 = 9 / 16 * 100 */
+  background-size: cover;
+  background-position: center;
+}
+
+/* 再生マーク（中央の丸＋▶） */
+.works-video-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55); /* 半透明の黒い丸 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #ffffff;
+  z-index: 5; /* サムネの上に強制表示 */
+}
+
+
+/* タイトル */
+.works-video-title {
+  margin: 0;
+  padding: 12px 16px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ホバー時のちょい浮き */
+.works-video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
