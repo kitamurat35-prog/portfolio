@@ -34,6 +34,10 @@ a {
 a:hover {
   opacity: 0.8;
 }
+/* 注釈・テキストリンク用 */
+.link-underline:hover {
+  text-decoration: underline;
+}
 
 /* ==============================
    レイアウト共通
@@ -428,6 +432,7 @@ a:hover {
   margin: 0 0 8px;
   color: #192849;
 }
+
 
 /* レスポンシブ（スマホ） */
 
